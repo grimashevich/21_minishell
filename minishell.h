@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/06 20:34:16 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/07 17:36:02 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include "libft/libft.h"
 
 typedef struct s_str
 {
@@ -58,13 +59,6 @@ typedef struct s_cmd
 	struct s_cmd	*child;			// Указатель на потомка (NULL по умолчанию). Если  NULL, то это команда.
 }	t_cmd;
 
-typedef struct s_list
-{
-	void			*value;
-	struct s_list	*next;
-}	t_list;
-
-
 typedef struct s_cmd_cntr
 {
 	t_cmd				*first_command;
@@ -85,6 +79,9 @@ typedef struct s_ms
 
 
 t_ms	g_ms;
+
+
+int	is_matches_pattern(char *pattern, char *str);
 
 /* 
 
