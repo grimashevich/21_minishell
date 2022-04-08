@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/07 17:36:02 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/08 21:18:45 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,25 @@ typedef struct s_ms
 	int		exit_code;		// Exit code последней исполненной команды
 }   t_ms;
 
+typedef struct s_2int2
+{
+	int	s[2];
+	int	p[2];
+}	t_2int2;
+
+
 
 t_ms	g_ms;
 
 
-int	is_matches_pattern(char *pattern, char *str);
+char	**apply_wildcard(char *pattern, char** text);
+
+
+int		compare_closed_str(char *str, char *ptrn); //DELETE
+int		compare_start(char *str, char *ptrn); //DELETE
+int		cmp_str_from_end(char *str1, char* str2, int len); //DELETE
+int		compare_end(char *str, char *ptrn); //DELETE
+char 	*str_copy(char *str, int cut_start, int cut_end); //DELETE
 
 /* 
 

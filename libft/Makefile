@@ -1,4 +1,6 @@
 NAME = libft.a
+CC := clang
+OBJ_DIR := obj
 SRC =		ft_isalpha.c	ft_isdigit.c	ft_isalnum.c	ft_isascii.c	ft_isprint.c	\
 			ft_strlen.c		ft_memset.c		ft_bzero.c		ft_memcpy.c		ft_memmove.c	\
 			ft_strlcpy.c	ft_strlcat.c	ft_toupper.c	ft_tolower.c	ft_strchr.c		\
@@ -11,23 +13,30 @@ SRC_B =		ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c			\
 			ft_lstadd_back.c	ft_lstdelone.c		ft_lstclear.c	ft_lstiter.c			\
 			ft_lstmap.c
 
-OBJ = $(patsubst %.c,%.o,$(SRC))
-OBJ_B = $(patsubst %.c,%.o,$(SRC_B))
+SRC_ADD = 	ft_free_text.c
 
-D_FILES = $(patsubst %.c,%.d,$(SRC) $(SRC_B))
+SRC += $(SRC_ADD)
 
-OPT_FLAGS =
-FLAGS = -Wall -Wextra -Werror
+OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ_B := $(SRC_B:%.c=$(OBJ_DIR)/%.o)
+
+DEP := $(OBJ:.o=.d)
+DEP_B := $(OBJ_B:.o=.d)
+
+OPT_FLAGS = -O3
+CPPFLAGS = -MMD
+FLAGS = -Wall -Wextra -Werror -g
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
 	ar rcs $(NAME) $?
 
-%.o : %.c
-	gcc $(FLAGS) $(OPT_FLAGS) -c $< -o $@ -MD
+$(OBJ_DIR)/%.o : %.c | $(OBJ_DIR)
+	$(CC) $(FLAGS) $(OPT_FLAGS) $(CPPFLAGS) -c $< -o $@
 
-include $(wildcard $(D_FILES))
+$(OBJ_DIR):
+	mkdir -p $@
 
 bonus :
 	@make OBJ="$(OBJ_B)" all
