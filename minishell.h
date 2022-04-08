@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 21:18:45 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:04:54 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_ms	g_ms;
 
 
 char	**apply_wildcard(char *pattern, char** text);
+int		total_compare(char *str, char *ptrn);
 
 
 int		compare_closed_str(char *str, char *ptrn); //DELETE
@@ -96,6 +97,7 @@ int		compare_start(char *str, char *ptrn); //DELETE
 int		cmp_str_from_end(char *str1, char* str2, int len); //DELETE
 int		compare_end(char *str, char *ptrn); //DELETE
 char 	*str_copy(char *str, int cut_start, int cut_end); //DELETE
+char	**ft_split_new(char *str, char sep);
 
 /* 
 

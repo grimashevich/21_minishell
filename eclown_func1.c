@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:01:55 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 21:21:01 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/08 23:16:26 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,18 +139,73 @@ char *str_copy(char *str, int cut_start, int cut_end)
 	return (result);
 }
 
-/* int total_compare(char *str, char *ptrn)
+int find_last_char(char *str, char c)
 {
-	int	star_cut;
-	int	end_cut;
+	int	result;
+	int	i;
 
+	i = 0;
+	result = -1;
+	while (str[i])
+	{
+		if (str[i] == c)
+			result = i;
+		i++;
+	}
+	return (result);
+}
+
+int find_first_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+
+
+int total_compare(char *str, char *ptrn)
+{
+	int		star_cut;
+	int		end_cut;
+	char	*closed_str;
+	char	*closed_ptrn;
+	int		result;
+
+	if (find_first_char(ptrn, '*') == -1)
+	{
+		if (ft_strncmp(str, ptrn, ft_max_int(ft_strlen(str), ft_strlen(ptrn))) == 0)
+			return (1);
+		return (0);
+	}
 	star_cut = compare_start(str, ptrn);
+	end_cut = -1;
 	if (star_cut != -1)
 		end_cut = compare_end(str, ptrn);
 	if (end_cut == -1)
 		return (0);
+	closed_str = str_copy(str, star_cut, end_cut);
+	if (! closed_str)
+		return (0);
+	closed_ptrn = str_copy(ptrn, star_cut, end_cut);
+	if (! closed_ptrn)
+	{
+		free(closed_str);
+		return(0);
+	}
+	result = compare_closed_str(closed_str, closed_ptrn);
+	free(closed_str);
+	free(closed_ptrn);
+	return (result);
 }
- */
+
 void move_counters(char *str, char *pattern, int *i, int *j)
 {
 	int	p_at_star;

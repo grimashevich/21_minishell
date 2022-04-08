@@ -13,7 +13,7 @@ LDLIBS := -lft
 
 SRC_C :=	
 			
-SRC_M :=	main.c		eclown_func1.c
+SRC_M :=	main.c		eclown_func1.c		ft_split_new.c
 
 SRC_B :=	main.c
 

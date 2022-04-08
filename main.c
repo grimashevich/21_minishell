@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:45:25 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 21:19:27 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/09 01:32:13 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,17 @@ int	main(int argc, char **argv, char **envp)
 
 
 
-	char	*ptrn = 	"ft*str*.c";
-	char	*haystack = "ft_substr_cut.c";
-	
-	char *tmp = str_copy(haystack, 2, 2);
-	printf("\n%s\n", tmp);
-	return(0);
+	//char	*ptrn = 	"ft*str*.c";
+	//char	*haystack = "ft_substr_cut.c";
 
 	
-	int nn = compare_end(haystack, ptrn);
-	if (nn != -1)
-		printf("\nTRUE\nn=%d\n", nn);
-	else
-		printf("\nFALSE\n\n");
-	return (0);
+	char **splt = ft_split_new("", '*');
+	(void) splt;
+	
+	//printf("\n\n%d\n\n", total_compare("abcde", "a*"));
+	//total_compare("abcdefghi", "ab*def*hi");
+	return(0);
+
 	
 	
 	//filtered = apply_wildcard("*", text);

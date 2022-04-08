@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_text.c                                     :+:      :+:    :+:   */
+/*   ft_max_min_int.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/08 16:44:49 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 23:27:55 by EClown           ###   ########.fr       */
+/*   Created: 2022/04/08 23:07:21 by EClown            #+#    #+#             */
+/*   Updated: 2022/04/08 23:10:07 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_free_text(char **text)
+int	ft_max_int(int n1, int n2)
 {
-	int	i;
+	if (n1 > n2)
+		return n1;
+	return n2;
+}
 
-	i = 0;
-	while (text[i])
-		free(text[i++]);
-	free(text);
+int	ft_min_int(int n1, int n2)
+{
+	if (n1 < n2)
+		return n1;
+	return n2;
 }

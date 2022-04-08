@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:25:12 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 17:23:31 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/08 23:11:23 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_free_text(char **text);
+int		ft_max_int(int n1, int n2);
+int		ft_min_int(int n1, int n2);
 
 #endif
