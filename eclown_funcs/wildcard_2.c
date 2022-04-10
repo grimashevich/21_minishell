@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/10 19:09:31 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 01:28:12 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	compare_start(char *str, char *ptrn);
 int	compare_end(char *str, char *ptrn);
 int	compare_closed_str(char *str, char *ptrn);
 
-int str_wildcard_compare(char *str, char *ptrn)
+int	str_wildcard_compare(char *str, char *ptrn)
 {
 	int		star_cut;
 	int		end_cut;
@@ -24,6 +24,7 @@ int str_wildcard_compare(char *str, char *ptrn)
 	char	*closed_ptrn;
 	int		result;
 
+	
 	if (find_first_char(ptrn, '*') == -1)
 	{
 		if (ft_strncmp(str, ptrn, ft_max_int(ft_strlen(str), ft_strlen(ptrn))) == 0)
@@ -36,10 +37,10 @@ int str_wildcard_compare(char *str, char *ptrn)
 		end_cut = compare_end(str, ptrn);
 	if (end_cut == -1)
 		return (0);
-	closed_str = str_copy(str, star_cut, end_cut);
+	closed_str = ec_str_copy(str, star_cut, end_cut);
 	if (! closed_str)
 		return (0);
-	closed_ptrn = str_copy(ptrn, star_cut, end_cut);
+	closed_ptrn = ec_str_copy(ptrn, star_cut, end_cut);
 	if (! closed_ptrn)
 	{
 		free(closed_str);
@@ -66,7 +67,7 @@ char	**apply_wildcard(char *pattern, char** text)
 	while (*text)
 	{
 		if (str_wildcard_compare(*text, pattern))
-			arr[i++] = *text;
+			arr[i++] = ft_strdup(*text);
 		text++;
 	}
 	arr[i] = NULL;
@@ -93,22 +94,64 @@ int	textlen(char **text)
 	return (result);
 }
 
-/* Uncover pattern * in all words excluding starting with '-' (minus)*/
+char	*expand_wildcard_cwd(char *wildcard)
+{
+	char	*cwd;
+	char	**files;
+	char	**result_files;
+	char	*result;
+
+	if (wildcard == NULL)
+		return (NULL);
+	cwd = malloc(MAX_PATH_LEN);
+	if (! cwd)
+		return (NULL);
+	getcwd(cwd, MAX_PATH_LEN); //TODO Заменить на нашу переменную cwd когда она заработает
+	
+	// files = ls_cwd(cwd);		//TODO Возвращает массив с освобожденной памятью
+
+	
+	files = malloc(sizeof(char **) * 3);
+	int i = 0;
+	files[i++] = ft_strdup("file2.h");
+	files[i++] = ft_strdup("file1.c");
+	files[i] = NULL;
+
+	free(cwd);
+	if (! files)
+		return (NULL);
+	result_files = apply_wildcard(wildcard, files);
+	ft_free_text(files);
+	if (!result_files)
+		return (NULL);
+	result = ft_anti_split(result_files, " ");
+	ft_free_text(result_files);
+	return (result);
+}
+
+
+/* Get command string, return command string with expanded wildcard '*' */
+
 /* char	*expand_wildcard_in_str(char *str)
 {
 	char	**words;
+	char	**pre_result;
+	char	*result;
+	int		words_count;
 	int		i;
 
 	if (str == NULL)
 		return (NULL);
 	if (*str == 0)
 		return(ft_strdup(""));
-	words = ft_split(str);
+	words = ft_split(str, ' ');
 	i = 0;
+	words_count = textlen(words);
 	while (words[i])
 	{
 		if (find_first_char)		
 	}
 	ft_free_text(words);
 	
-} */
+} 
+ */

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ls_cwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 18:13:51 by ccamie            #+#    #+#             */
-/*   Updated: 2022/04/10 19:15:20 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:49:33 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils/ft_list.h"
-
+#include "minishell.h"
 #include <dirent.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -58,6 +57,7 @@ char	**ls_cwd(char *path)
 	return (strings);
 }
 
+/* 
 void	ft_strings_remove_all(char ***strings);
 int		ft_strings_print(char **strings);
 
@@ -72,3 +72,4 @@ int	main(void)
 	free(strings);
 	return (0);
 }
+ */

@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/10 17:48:54 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 00:08:43 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # define TMP_FILE_NAME ".tmp_file"
 # define LLI_MIN "9223372036854775808"
 # define LLI_MAX "9223372036854775807"
+# define MAX_PATH_LEN 4096
 
 # include <unistd.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -88,8 +90,30 @@ char	**apply_wildcard(char *pattern, char** text);
 int		total_compare(char *str, char *ptrn);
 int		get_lines_count(char **text);
 int		find_first_char(char *str, char c);
-char	*str_copy(char *str, int cut_start, int cut_end);
+char	*ec_str_copy(char *str, int cut_start, int cut_end);
+char	**ls_cwd(char *path);
+char	*ft_anti_split(char **strings, char *separator);
+char	*expand_wildcard_cwd(char *wildcard);
+char	**ft_list_to_strings(t_list *list);
+void	ft_list_remove_all(t_list **list, void (*del)(void *));
 
+
+void	ft_list_add_back(t_list **list, t_list *new);
+void	ft_list_add_front(t_list **list, t_list *new);
+void	ft_list_remove_all(t_list **list, void (*del)(void *));
+int		ft_list_remove_current(t_list **list, t_list *current, void (*del)(void *));
+void	ft_list_remove(t_list *list, void (*del)(void *));
+size_t	ft_list_get_count(t_list *list);
+t_list	*ft_list_get_last(t_list *list);
+t_list	*ft_list_get_prev(t_list *list, t_list *current);
+void	ft_list_iter(t_list *list, void (*fun)(void *));
+t_list	*ft_list_map(t_list *list, void *(*fun)(void *), void (*del)(void *));
+t_list	*ft_list_new(void *content);
+char	**ft_list_to_strings(t_list *list);
+
+t_list	*ft_strings_to_list(char **strings);
+
+void	ft_strcpy(const char *from, char *to);
 
 /* 
 

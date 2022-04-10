@@ -6,12 +6,15 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:45:25 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/09 22:55:44 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 01:25:55 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <time.h>
+
+
+int	str_wildcard_compare(char *str, char *ptrn);
 
 void print_text(char **text)
 {
@@ -29,36 +32,46 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) envp;
 
-
-	char	*text[10];
-	int i = 0;
-	text[i++] = "eee";
- 	text[i++] = "one two trhee";
- 	text[i++] = "gu s";
- 	text[i++] = "bus";
-	text[i++] = "aliquam,#s";
-	text[i++] = "aetus nisl";
-	text[i++] = "varius,";
-	text[i] = NULL;
-
-
-	char	**filtered;
-	char *answer;
-	while (1)
-	{
-		printf("\nORIGINAL:\n- - - - -\n");
-		print_text(text);
-		answer = readline("\nEnter wildcard > ");
-		add_history(answer);
-		filtered = apply_wildcard(answer, text);
-		printf("\nFILTERED:\n- - - - -\n");
-		print_text(filtered);
-		printf("\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
-		free(filtered);
-		free(answer);
-		getchar();
-	}
 	
+	char	*cwd;
+	char	**files;
+	
+	cwd = malloc(MAX_PATH_LEN);
+	getcwd(cwd, MAX_PATH_LEN);
+	
+	files = ls_cwd(cwd);
+
+	printf("%s\n", files[0]);
+
+
+/* 
+
+	// TEST CASE FOR 	char *expand_wildcard_cwd(char *wildcard)
+
+	char **text = malloc(sizeof(char **) * 3);
+	int i = 0;
+
+
+	char *files = expand_wildcard_cwd("*");
+	printf("%s\n", files);
+	free(files);
+*/
+
+/* 
+	// TEST CASE FOR 	char **apply_wildcard(char *pattern, char** text)
+
+	char **text = malloc(sizeof(char **) * 3);
+	int i = 0;
+
+	text[i++] = ft_strdup("str one");
+	text[i++] = ft_strdup("str two");
+	text[i++] = NULL;
+	
+	char** text2 = apply_wildcard("*", text);
+	ft_free_text(text);
+	print_text(text2);
+	ft_free_text(text2);
+*/
 	
 	return (0);
 }

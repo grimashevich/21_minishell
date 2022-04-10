@@ -15,11 +15,10 @@ SRC_B =		ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c			\
 
 SRC_ADD = 	ft_free_text.c		ft_max_min_int.c
 
-SRC += $(SRC_ADD)
+SRC += $(SRC_B) $(SRC_ADD)
 
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_B := $(SRC_B:%.c=$(OBJ_DIR)/%.o)
-OBJ = $(OBJ_B)
 
 DEP := $(OBJ:.o=.d)
 DEP_B := $(OBJ_B:.o=.d)

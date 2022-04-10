@@ -13,10 +13,9 @@ S_FLAGS := -fsanitize=address
 LDFLAGS := -L$(LIBFT_DIR) -lreadline
 LDLIBS := -lft
 
-SRC_C :=	
+SRC_C :=	$(wildcard utils/*.c)		ls_cwd_antisplit.c		ls_cwd.c
 
-SRC_EC := eclown_func1.c	wildcard_1.c	wildcard_2.c
-
+SRC_EC :=	eclown_func1.c	wildcard_1.c	wildcard_2.c
 
 SRC_EC := $(SRC_EC:%.c=$(EC_FUNC_FOLDER)/%.c)
 

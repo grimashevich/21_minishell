@@ -6,13 +6,13 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:01:55 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/10 17:44:57 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 00:15:02 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *str_copy(char *str, int cut_start, int cut_end)
+char	*ec_str_copy(char *str, int cut_start, int cut_end)
 {
 	int		str_len;
 	int		result_str_len;
@@ -36,7 +36,7 @@ char *str_copy(char *str, int cut_start, int cut_end)
 	return (result);
 }
 
-int find_last_char(char *str, char c)
+int	find_last_char(char *str, char c)
 {
 	int	result;
 	int	i;
@@ -52,7 +52,7 @@ int find_last_char(char *str, char c)
 	return (result);
 }
 
-int find_first_char(char *str, char c)
+int	find_first_char(char *str, char c)
 {
 	int	i;
 
@@ -66,7 +66,7 @@ int find_first_char(char *str, char c)
 	return (-1);
 }
 
-int get_lines_count(char **text)
+int	get_lines_count(char **text)
 {
 	int	n;
 

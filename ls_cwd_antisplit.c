@@ -6,13 +6,14 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:17:30 by ccamie            #+#    #+#             */
-/*   Updated: 2022/04/10 18:13:42 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/10 23:49:31 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "minishell.h"
 
 DIR				*dir;
 struct dirent	*dp;
@@ -28,11 +29,6 @@ while ((dp = readdir(dir)) != NULL)
 	printf("%s\n", dp->d_name);
 } */
 
-int		ft_strcmp(const char *one, const char *two);
-void	ft_strcpy(const char *from, char *to);
-char	*ft_strjoin(char *one, char *two);
-size_t	ft_strlen(const char *string);
-int		ft_strncmp(char *one, char *two, size_t length);
 
 size_t	get_lenght(char **strings, int separator)
 {
@@ -82,7 +78,7 @@ char	*ft_anti_split(char **strings, char *separator)
 	return (string);
 }
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	char	*lol[2];
 	char	*string;
@@ -96,3 +92,4 @@ int	main(int argc, char **argv, char **envp)
 	free(string);
 	return (0);
 }
+ */
