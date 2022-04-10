@@ -6,11 +6,11 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 00:05:45 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/09 01:29:07 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:24:05 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
 int get_char_count(char *str, char c)
 {
@@ -59,7 +59,7 @@ char **get_pointer_array(char *str, char sep, int words_cnt)
 			n++;
 		result[j++] = malloc(sizeof(char) * (n + 1));
 		if (! result[j - 1])
-			clear_and_finish(result);
+			return (clear_and_finish(result));
 		if (str[i - 1] == 0)
 			break;
 	}

@@ -6,13 +6,13 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:44:49 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 23:27:55 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:20:50 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_free_text(char **text)
+void	ft_free_text(char **text)
 {
 	int	i;
 

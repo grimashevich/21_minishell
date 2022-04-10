@@ -19,6 +19,7 @@ SRC += $(SRC_ADD)
 
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
 OBJ_B := $(SRC_B:%.c=$(OBJ_DIR)/%.o)
+OBJ = $(OBJ_B)
 
 DEP := $(OBJ:.o=.d)
 DEP_B := $(OBJ_B:.o=.d)

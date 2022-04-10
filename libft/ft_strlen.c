@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:25:12 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/08 16:37:25 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/10 19:04:07 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	ft_strlen(const char *s)
 {
-	unsigned int	result;
+	size_t	result;
 
 	if (s == NULL)
 		return (0);
 	result = 0;
-	while (*(s++) != 0)
+	while (s[result])
 		result++;
 	return (result);
 }

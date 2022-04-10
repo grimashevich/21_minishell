@@ -6,126 +6,97 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:25:12 by EClown            #+#    #+#             */
-/*   Updated: 2021/10/19 15:49:54 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/09 22:20:37 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-/* Возвращает массив интов, каждый элемент которого содержит кол-во символов
- * для массивов под результаты сплита. Отрицательное значение - конец массива*/
-static size_t	get_split_count(const char *s, char c)
-{
-	size_t	i;
-	size_t	result;
-
-	if (s == NULL || *s == 0)
-		return (0);
-	i = 0;
-	result = 0;
-	if (s[i] != c && s[i] != 0)
-		result++;
-	i++;
-	while (s[i])
-	{
-		if (s[i] != c && s[i - 1] == c)
-			result++;
-		i++;
-	}
-	return (result);
-}
-
-static int	*get_words_len(const char *s, char c, size_t size)
-{
-	size_t	cnt[2];
-	int		*result;
-
-	result = ft_calloc(size * 2, sizeof(int));
-	if (! result)
-		return (NULL);
-	cnt[0] = 0;
-	cnt[1] = 0;
-	while (s[cnt[0]] == c)
-		cnt[0]++;
-	result[0] = (int) cnt[0];
-	while (s[cnt[0]] && cnt[1] < size * 2)
-	{
-		if (s[cnt[0]] != c && cnt[1] > 0 && result[cnt[1]] == 0)
-			result[cnt[1]] = (int) cnt[0];
-		else if (s[cnt[0]] == c && s[cnt[0] - 1] != c)
-		{
-			result[cnt[1] + 1] = (int) cnt[0] - 1;
-			cnt[1] += 2;
-		}
-		cnt[0]++;
-	}
-	if (result[size * 2 - 1] == 0)
-		result[size * 2 - 1] = (int) cnt[0] - 1;
-	return (result);
-}
-
-static void	*clear_memory(void **s, void *l)
+static char	**clear_and_finish(char **text, char *str)
 {
 	int	i;
 
-	if (l)
-		free(l);
 	i = 0;
-	if (s)
-	{
-		while (s[i])
-		{
-			if (s[i])
-				free(s[i++]);
-		}
-		free(s);
-	}
+	while (text[i])
+		free(text[i]);
+	free(text);
+	free(str);
 	return (NULL);
 }
 
-char	**ft_split_sub(size_t cnt[], int *words_len, char **result, \
-														const char *s)
+static char	**get_pointer_array(char *str, char sep, int words_cnt)
 {
-	size_t	j;
+	int		i;
+	int		j;
+	int		n;
+	char	**result;
 
-	while (cnt[1] < cnt[0])
+	result = ft_calloc((words_cnt + 1), sizeof(char *));
+	if (! result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	if (str[i] == 0)
+		result[j] = ft_calloc(1, sizeof(char));
+	while (str[i])
 	{
-		result[cnt[1]] = malloc(words_len[cnt[1] * 2 + 1] - \
-				words_len[cnt[1] * 2] + 2);
-		if (! result[cnt[1]])
-			return (clear_memory((void **) result, words_len));
-		result[cnt[1]][words_len[cnt[1] * 2 + 1] - \
-						words_len[cnt[1] * 2] + 1] = 0;
-		j = words_len[cnt[1] * 2];
-		while ((int) j <= words_len[cnt[1] * 2 + 1])
-		{
-			result[cnt[1]][j - words_len[cnt[1] * 2]] = s[j];
-			j++;
-		}
-		cnt[1]++;
+		n = 0;
+		while (str[i] != 0 && str[i++] != sep)
+			n++;
+		result[j++] = malloc(sizeof(char) * (n + 1));
+		if (! result[j - 1])
+			return (clear_and_finish(result, str));
+		while (str[i] != 0 && str[i] == sep)
+			i++;
+		n = 0;
 	}
-	free(words_len);
 	return (result);
 }
 
-char	**ft_split(char const *s, char c)
+static void	fill_array(char **text, char *str, char sep)
 {
-	char	**result;
-	int		*words_len;
-	size_t	cnt[2];
+	int		i;
+	int		j;
+	int		n;
 
-	if (s == NULL)
+	i = 0;
+	j = 0;
+	n = 0;
+	while (str[i])
+	{
+		while (str[i] != sep && str[i] != 0)
+			text[j][n++] = str[i++];
+		text[j][n++] = 0;
+		while (str[i] == sep)
+			i++;
+		n = 0;
+		j++;
+	}
+}
+
+char	**ft_split(char *str, char sep)
+{
+	int		split_cnt;
+	char	**result;
+	char	*str_trim;
+	char	char_to_cut[2];
+	int		i;
+
+	if (str == NULL)
 		return (NULL);
-	cnt[0] = get_split_count(s, c);
-	words_len = 0;
-	if (cnt[0] > 0)
-		words_len = get_words_len(s, c, cnt[0]);
-	result = malloc(sizeof(char *) * (cnt[0] + 1));
-	if (! result)
-		return (NULL);
-	cnt[1] = 0;
-	while (cnt[1] < cnt[0] + 1)
-		result[cnt[1]++] = 0;
-	result[cnt[0]] = NULL;
-	cnt[1] = 0;
-	return (ft_split_sub(cnt, words_len, result, s));
+	char_to_cut[0] = sep;
+	char_to_cut[1] = 0;
+	str_trim = ft_strtrim(str, char_to_cut);
+	split_cnt = 1;
+	i = 0;
+	while (str_trim[i])
+	{
+		if (str_trim[i] == sep && str_trim[i + 1] != sep)
+			split_cnt++;
+		i++;
+	}
+	result = get_pointer_array(str_trim, sep, split_cnt);
+	fill_array(result, str_trim, sep);
+	free(str_trim);
+	return (result);
 }

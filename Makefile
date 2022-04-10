@@ -1,6 +1,8 @@
 NAME := minishell
 CC := clang
 OBJ_DIR := obj
+EC_FUNC_FOLDER := eclown_funcs
+
 
 LIBFT_DIR := libft
 LIBFT_LIB := $(LIBFT_DIR)/libft.a
@@ -12,12 +14,17 @@ LDFLAGS := -L$(LIBFT_DIR) -lreadline
 LDLIBS := -lft
 
 SRC_C :=	
-			
-SRC_M :=	main.c		eclown_func1.c		ft_split_new.c
+
+SRC_EC := eclown_func1.c	wildcard_1.c	wildcard_2.c
+
+
+SRC_EC := $(SRC_EC:%.c=$(EC_FUNC_FOLDER)/%.c)
+
+SRC_M :=	main.c
 
 SRC_B :=	main.c
 
-SRC := 		$(SRC_C) $(SRC_M)
+SRC := 		$(SRC_C) $(SRC_M) $(SRC_EC)
 SRC_B :=	$(SRC_B) $(SRC_C)
 
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -35,7 +42,7 @@ bonus:
 $(NAME): $(LIBFT_LIB) $(OBJ)
 	$(CC) $(LDFLAGS) $(OBJ) $(LDLIBS) $(S_FLAGS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR) 
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(S_FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
