@@ -13,43 +13,51 @@
 #include "minishell.h"
 #include <dirent.h>
 #include <stdlib.h>
-#include <stdio.h>
+// #include <stdio.h>
 
-static t_list	*get_list(char *path)
+static t_list	*get_list(DIR *dir)
 {
 	t_list			*list;
 	t_list			*new;
-	DIR				*dir;
+	char			*data;
 	struct dirent	*dp;
 
-	dir = opendir(path);
-	if (dir == NULL)
-		return (NULL);
-	dp = readdir(dir);
 	list = NULL;
+	dp = readdir(dir);
 	while (dp != NULL)
 	{
-		new = ft_list_new(dp->d_name);
-		if (new == NULL)
+		data = ft_strdup(dp->d_name);
+		new = ft_list_new(data);
+		if (data == NULL || new == NULL)
 		{
-			ft_list_remove_all(&list, NULL);
+			free(data);
+			ft_list_remove(new, NULL);
+			ft_list_remove_all(&list, free);
 			return (NULL);
 		}
 		ft_list_add_back(&list, new);
 		dp = readdir(dir);
 	}
-	closedir(dir);
 	return (list);
 }
 
 char	**ls_cwd(char *path)
 {
+	DIR		*dir;
 	char	**strings;
 	t_list	*list;
 
-	list = get_list(path);
+	dir = opendir(path);
+	if (dir == NULL)
+		return (NULL);
+	list = get_list(dir);
 	if (list == NULL)
 		return (NULL);
+	if (closedir(dir))
+	{
+		ft_list_remove_all(&list, free);
+		return (NULL);
+	}
 	strings = ft_list_to_strings(list);
 	ft_list_remove_all(&list, NULL);
 	if (strings == NULL)
@@ -57,19 +65,17 @@ char	**ls_cwd(char *path)
 	return (strings);
 }
 
-/* 
-void	ft_strings_remove_all(char ***strings);
-int		ft_strings_print(char **strings);
+// int		ft_strings_print(char **strings);
+// void	ft_strings_remove_all(char ***strings);
 
-int	main(void)
-{
-	char	**strings;
+// int	main(void)
+// {
+// 	char	**strings;
 
-	strings = ls_cwd("./lol");
-	if (strings == NULL)
-		return (1);
-	ft_strings_print(strings);
-	free(strings);
-	return (0);
-}
- */
+// 	strings = ls_cwd("eclown_funcs");
+// 	if (strings == NULL)
+// 		return (1);
+// 	ft_strings_print(strings);
+// 	ft_strings_remove_all(&strings);
+// 	return (0);
+// }
