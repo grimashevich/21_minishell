@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/06 20:34:16 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 00:08:43 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@
 # define TMP_FILE_NAME ".tmp_file"
 # define LLI_MIN "9223372036854775808"
 # define LLI_MAX "9223372036854775807"
+# define MAX_PATH_LEN 4096
 
 # include <unistd.h>
+# include <stddef.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include "libft/libft.h"
 
 typedef struct s_str
 {
@@ -58,13 +61,6 @@ typedef struct s_cmd
 	struct s_cmd	*child;			// Указатель на потомка (NULL по умолчанию). Если  NULL, то это команда.
 }	t_cmd;
 
-typedef struct s_list
-{
-	void			*value;
-	struct s_list	*next;
-}	t_list;
-
-
 typedef struct s_cmd_cntr
 {
 	t_cmd				*first_command;
@@ -83,8 +79,14 @@ typedef struct s_ms
 	int		exit_code;		// Exit code последней исполненной команды
 }   t_ms;
 
-
 t_ms	g_ms;
+
+typedef struct s_2int2
+{
+	int	s[2];
+	int	p[2];
+}	t_2int2;
+
 
 /* 
 
@@ -118,5 +120,26 @@ s_cmd	*parser_lvl1(char *str, int start, int end)
  char	**parser_lvl2(char *str);
 
  */
+
+# ifndef ENVP_H
+#  define ENVP_H
+
+void	envp_append(char *variable, char *value);
+size_t	envp_count(void);
+int		envp_get_index(char *variable);
+char	*envp_get_value(char *variable);
+void	envp_init(char **envp);
+void	envp_insert(char *variable, char *value, int index);
+void	envp_print(void);
+void	envp_remove_all(void);
+void	envp_remove_first(void);
+void	envp_remove_last(void);
+void	envp_remove_by_index(int index);
+void	envp_remove(char *variable);
+void	envp_replace_by_index(char *variable, char *value, int index);
+void	envp_replace(char *variable, char *value);
+void	envp_status(void);
+
+# endif // ENVP_H
 
 #endif  /* MINISHELL_H */

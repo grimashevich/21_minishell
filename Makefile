@@ -1,48 +1,54 @@
-NAME := minishell
-CC := clang
-OBJ_DIR := obj
+NAME		=	minishell
 
-# CFLAGS := -Wall -Wextra -Werror -g
-CPPFLAGS := -MMD
-S_FLAGS := -fsanitize=address
-LDFLAGS := -lreadline
+HEADER		=	minishell.h
 
-SRC_C :=	
-			
-SRC_M :=	main.c
+LIBFT		=	libft/libft.a
 
-SRC_B :=	main.c
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined
+# CFLAGS		=	-Wall -Wextra -Werror
+RM			=	rm -f
 
-SRC := 		$(SRC_C) $(SRC_M)
-SRC_B :=	$(SRC_B) $(SRC_C)
+SOURCE		=	envp/envp_append.c				\
+				envp/envp_count.c				\
+				envp/envp_get_index.c			\
+				envp/envp_get_value.c			\
+				envp/envp_init.c				\
+				envp/envp_insert.c				\
+				envp/envp_print.c				\
+				envp/envp_remove_all.c			\
+				envp/envp_remove_by_index.c		\
+				envp/envp_remove_first.c		\
+				envp/envp_remove_last.c			\
+				envp/envp_remove.c				\
+				envp/envp_replace_by_index.c	\
+				envp/envp_replace.c				\
+				envp/envp_status.c				\
+				pwd/pwd_update.c				\
+				main.c							\
 
-OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
-OBJ_B := $(SRC_B:%.c=$(OBJ_DIR)/%.o)
+OBJECT		=	$(SOURCE:.c=.o)
 
-DEP := $(OBJ:.o=.d)
-DEP_B := $(OBJ_B:.o=.d)
+.PHONY		:	all clean fclean re libft
 
-.PHONY: all clean fclean re bonus
+all			:	libft $(NAME)
 
-all:	$(NAME)
-bonus:
-	@make OBJ="$(OBJ_B)" DEP="$(DEP_B)" all
+$(NAME)		:	$(OBJECT) $(LIBFT)
+				$(CC) $(CFLAGS) $(OBJECT) $(LIBFT) -o $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ) $(LDLIBS) $(S_FLAGS) -o $(NAME)
+%.o			:	%.c Makefile
+				$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(S_FLAGS) -c $< -o $@
+libft		:
+				make -C libft
 
-$(OBJ_DIR):
-	mkdir -p $@
+clean		:
+				make -C libft clean
+				$(RM) $(OBJECT)
 
--include $(DEP) $(DEP_B)
+fclean		:
+				make -C libft fclean
+				$(RM) $(OBJECT)
+				$(RM) $(NAME)
 
-clean:
-	@rm -f $(OBJ) $(DEP) $(OBJ_B) $(DEP_B)
-
-fclean: clean
-	@rm -f $(NAME) $(NAME_B)
-
-re: fclean all
+re			:	fclean all
