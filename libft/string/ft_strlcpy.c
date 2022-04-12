@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccamie <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 21:40:27 by ccamie            #+#    #+#             */
-/*   Updated: 2021/10/12 18:03:40 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/04/12 18:32:07 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ size_t	ft_strlcpy(char *from, char *to, size_t lenght)
 		return (tolenght);
 	lenght -= 1;
 	i = 0;
-	while (i < lenght && to[i])
+	while (i < lenght && from[i] != '\0')
 	{
-		from[i] = to[i];
+		to[i] = from[i];
 		i += 1;
 	}
-	from[i] = '\0';
+	to[i] = '\0';
 	return (tolenght);
 }
