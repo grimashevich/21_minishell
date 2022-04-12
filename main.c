@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:45:25 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/11 01:25:55 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/11 23:32:01 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,33 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) envp;
 
-	
-	char	*cwd;
-	char	**files;
-	
-	cwd = malloc(MAX_PATH_LEN);
-	getcwd(cwd, MAX_PATH_LEN);
-	
-	files = ls_cwd(cwd);
-
-	printf("%s\n", files[0]);
-
-
-/* 
 
 	// TEST CASE FOR 	char *expand_wildcard_cwd(char *wildcard)
 
-	char **text = malloc(sizeof(char **) * 3);
-	int i = 0;
+/* 	char * answer = malloc(256);
+	while (answer)
+	{
+	
+		answer = readline("Enter wildcard: ");
+		add_history(answer);
+		char *files = expand_wildcard_cwd(answer);
+		free(answer);
+		printf("\n%s\n", files);
+		free(files);
+	} */
 
+	char * answer = malloc(256);
+	while (answer)
+	{
+	
+		answer = readline("Enter command with wildcard: ");
+		add_history(answer);
+		char *files = expand_wildcard_in_str(answer);
+		free(answer);
+		printf("---\n=>%s\n", files);
+		free(files);
+	}
 
-	char *files = expand_wildcard_cwd("*");
-	printf("%s\n", files);
-	free(files);
-*/
 
 /* 
 	// TEST CASE FOR 	char **apply_wildcard(char *pattern, char** text)

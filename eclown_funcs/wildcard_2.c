@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/11 01:28:12 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/12 10:54:39 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	str_wildcard_compare(char *str, char *ptrn)
 	char	*closed_ptrn;
 	int		result;
 
-	
 	if (find_first_char(ptrn, '*') == -1)
 	{
 		if (ft_strncmp(str, ptrn, ft_max_int(ft_strlen(str), ft_strlen(ptrn))) == 0)
@@ -66,7 +65,7 @@ char	**apply_wildcard(char *pattern, char** text)
 	i = 0;
 	while (*text)
 	{
-		if (str_wildcard_compare(*text, pattern))
+		if (**text != 0 && str_wildcard_compare(*text, pattern))
 			arr[i++] = ft_strdup(*text);
 		text++;
 	}
@@ -94,6 +93,21 @@ int	textlen(char **text)
 	return (result);
 }
 
+static void hide_hidden_fles(char **files, char * wildcard)
+{
+	int i = 0;
+
+	//if (ft_strncmp(wildcard, ".*", 3) == 0)
+	if (wildcard[0] == '.')
+		return ;
+	while (files[i])
+	{
+		if (files[i][0] == '.')
+			files[i][0] = 0;
+		i++;
+	}
+}
+
 char	*expand_wildcard_cwd(char *wildcard)
 {
 	char	*cwd;
@@ -103,41 +117,41 @@ char	*expand_wildcard_cwd(char *wildcard)
 
 	if (wildcard == NULL)
 		return (NULL);
+	if (*wildcard == 0)
+		return (ft_strdup("")); //TODO Уточнить что возвращаем
 	cwd = malloc(MAX_PATH_LEN);
 	if (! cwd)
 		return (NULL);
 	getcwd(cwd, MAX_PATH_LEN); //TODO Заменить на нашу переменную cwd когда она заработает
-	
-	// files = ls_cwd(cwd);		//TODO Возвращает массив с освобожденной памятью
-
-	
-	files = malloc(sizeof(char **) * 3);
-	int i = 0;
-	files[i++] = ft_strdup("file2.h");
-	files[i++] = ft_strdup("file1.c");
-	files[i] = NULL;
-
+	files = ls_cwd(cwd);		//TODO Возвращает массив с освобожденной памятью
 	free(cwd);
 	if (! files)
 		return (NULL);
+	hide_hidden_fles(files, wildcard);	
 	result_files = apply_wildcard(wildcard, files);
 	ft_free_text(files);
-	if (!result_files)
-		return (NULL);
+	if (!result_files || !result_files[0])
+		return (ft_strdup(""));
 	result = ft_anti_split(result_files, " ");
 	ft_free_text(result_files);
 	return (result);
 }
 
 
+static int skip_word(char *word)
+{
+	if (word[0] == '-' || find_first_char(word, '*') == -1)
+		return (1);
+	return(0);
+}
+
 /* Get command string, return command string with expanded wildcard '*' */
 
-/* char	*expand_wildcard_in_str(char *str)
+//TODO case: m"ai"n*.'c'
+char	*expand_wildcard_in_str(char *str)
 {
 	char	**words;
-	char	**pre_result;
-	char	*result;
-	int		words_count;
+	char	*tmp_word;
 	int		i;
 
 	if (str == NULL)
@@ -145,13 +159,20 @@ char	*expand_wildcard_cwd(char *wildcard)
 	if (*str == 0)
 		return(ft_strdup(""));
 	words = ft_split(str, ' ');
+	if (! words)
+		return (NULL);
 	i = 0;
-	words_count = textlen(words);
 	while (words[i])
 	{
-		if (find_first_char)		
+		if (skip_word(words[i++]))
+			continue;
+		tmp_word = words[i - 1];
+		words[i - 1] = expand_wildcard_cwd(tmp_word);
+		free(tmp_word);
 	}
+	tmp_word = ft_anti_split(words, " ");
 	ft_free_text(words);
-	
+	if (! tmp_word)
+		return (NULL);
+	return (tmp_word);
 } 
- */
