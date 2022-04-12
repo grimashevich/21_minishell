@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/12 21:12:21 by ccamie            #+#    #+#              #
+#    Updated: 2022/04/12 21:12:22 by ccamie           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		=	minishell
 
 HEADER		=	minishell.h
@@ -25,6 +37,8 @@ SOURCE		=	envp/envp_append.c				\
 				envp/envp_replace.c				\
 				envp/envp_status.c				\
 				pwd/pwd_update.c				\
+				parserlvl1/parserlvl1.c			\
+				parserlvl1/print_tree.c			\
 				main.c							\
 
 OBJECT		=	$(SOURCE:.c=.o)
