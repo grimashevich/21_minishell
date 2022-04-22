@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:25:12 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/09 22:27:44 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/22 18:14:22 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	ft_free_text(char **text);
 int		ft_max_int(int n1, int n2);
 int		ft_min_int(int n1, int n2);
 char	**ft_split_new(char *str, char sep);
+char	*ft_strjoin3(char *str1, char *str2, char *str3);
 
 #endif

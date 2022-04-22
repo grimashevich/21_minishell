@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:45:25 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/11 23:32:01 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/22 18:12:35 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	main(int argc, char **argv, char **envp)
 		free(files);
 	} */
 
-	char * answer = malloc(256);
+	char *answer = malloc(256);
+
 	while (answer)
 	{
 	
@@ -55,9 +56,10 @@ int	main(int argc, char **argv, char **envp)
 		add_history(answer);
 		char *files = expand_wildcard_in_str(answer);
 		free(answer);
-		printf("---\n=>%s\n", files);
+		printf("---\n=> %s\n\n", files);
 		free(files);
 	}
+	
 
 
 /* 

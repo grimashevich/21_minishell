@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/12 10:54:39 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/22 18:31:39 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	compare_start(char *str, char *ptrn);
 int	compare_end(char *str, char *ptrn);
 int	compare_closed_str(char *str, char *ptrn);
+char	*str_join_3(char *str1, char *str2, char *str3);
 
 int	str_wildcard_compare(char *str, char *ptrn)
 {
@@ -131,7 +132,7 @@ char	*expand_wildcard_cwd(char *wildcard)
 	result_files = apply_wildcard(wildcard, files);
 	ft_free_text(files);
 	if (!result_files || !result_files[0])
-		return (ft_strdup(""));
+		return (ft_strjoin3("'", wildcard, "'"));
 	result = ft_anti_split(result_files, " ");
 	ft_free_text(result_files);
 	return (result);
