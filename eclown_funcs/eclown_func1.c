@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:01:55 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/11 00:15:02 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/26 19:27:56 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,32 @@ int	get_lines_count(char **text)
 	while (text[n])
 		n++;
 	return (n);
+}
+
+/* 
+
+return 1 if char is in closed quotes
+return 0 if:
+			char is not in quotes 
+			quotes are not closed
+			an error has occurred
+ */
+int	is_char_in_quotes(char *str, char *c)
+{
+	int		str_len;
+	char	*q_start;
+	char	*q_end;
+
+	if (str == NULL || *str == 0 || c == NULL || c <= str)
+		return (0);
+	str_len = ft_strlen(str);
+	if (c >= &str[str_len])
+		return (0);
+	q_start = ft_strchr(str, '\'');
+	q_end = ft_strchr(c, '\'');
+	if (q_start && q_start < c && q_end)
+		return (1);
+	q_start = ft_strchr(str, '\"');
+	q_end = ft_strchr(c, '\"');
+	return (q_start && q_start < c && q_end);
 }

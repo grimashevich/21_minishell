@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/22 18:27:47 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/26 17:19:44 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char	*expand_wildcard_cwd(char *wildcard);
 char	**ft_list_to_strings(t_list *list);
 void	ft_list_remove_all(t_list **list, void (*del)(void *));
 char	*expand_wildcard_in_str(char *str);
+int	is_char_in_quotes(char *str, char *c);
 
 
 void	ft_list_add_back(t_list **list, t_list *new);
