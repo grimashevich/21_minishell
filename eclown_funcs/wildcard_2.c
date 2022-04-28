@@ -6,15 +6,15 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/22 18:31:39 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/28 14:44:59 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	compare_start(char *str, char *ptrn);
-int	compare_end(char *str, char *ptrn);
-int	compare_closed_str(char *str, char *ptrn);
+int		compare_start(char *str, char *ptrn);
+int		compare_end(char *str, char *ptrn);
+int		compare_closed_str(char *str, char *ptrn);
 char	*str_join_3(char *str1, char *str2, char *str3);
 
 int	str_wildcard_compare(char *str, char *ptrn)

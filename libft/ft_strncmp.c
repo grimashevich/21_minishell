@@ -6,9 +6,10 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:25:12 by EClown            #+#    #+#             */
-/*   Updated: 2021/10/18 19:25:12 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/28 14:51:42 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ncmp_result(int n)
