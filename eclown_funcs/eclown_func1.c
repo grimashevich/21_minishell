@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:01:55 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/28 17:46:13 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:07:12 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ return 0 if:
 			quotes are not closed
 			an error has occurred
  */
+// TODO REWRITE for case "tes"*"file"
 int	is_char_in_quotes(char *str, char *c)
 {
 	int		str_len;

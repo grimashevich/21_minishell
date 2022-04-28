@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/28 14:44:59 by EClown           ###   ########.fr       */
+/*   Updated: 2022/04/28 18:08:25 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ char	*expand_wildcard_cwd(char *wildcard)
 	return (result);
 }
 
-
+// TODO fix for case "*"
 static int skip_word(char *word)
 {
 	if (word[0] == '-' || find_first_char(word, '*') == -1)
@@ -148,7 +148,11 @@ static int skip_word(char *word)
 
 /* Get command string, return command string with expanded wildcard '*' */
 
-//TODO case: m"ai"n*.'c'
+/*
+case: "tes"*"file” → testfile
+
+*/
+
 char	*expand_wildcard_in_str(char *str)
 {
 	char	**words;
