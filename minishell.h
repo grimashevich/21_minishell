@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/28 17:37:34 by EClown           ###   ########.fr       */
+/*   Updated: 2022/05/04 19:31:42 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ char	*expand_wildcard_in_str(char *str);
 int		is_char_in_quotes(char *str, char *c);
 char	*remove_quotes(char *str);
 char	*open_quotes(char *str);
+int		symb_count_before_char(char c, char *str, char *before);
+int		symb_count_after_char(char c, char *after);
+int		pre_str_wildcard_compare(char *str, char *ptrn);
 
 
 void	ft_list_add_back(t_list **list, t_list *new);

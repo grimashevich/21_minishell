@@ -6,7 +6,7 @@
 /*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 17:36:31 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/28 18:08:25 by EClown           ###   ########.fr       */
+/*   Updated: 2022/05/04 19:37:48 by EClown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,61 @@ int	str_wildcard_compare(char *str, char *ptrn)
 	return (result);
 }
 
+static void replace_sym_to_minus_q(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c && is_char_in_quotes(str, &(str[i])))
+			str[i] = -1 * c;
+		i++;
+	}
+}
+
+static void replace_sym_to_minus(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			str[i] = -1 * c;
+		i++;
+	}
+}
+
+int pre_str_wildcard_compare(char *str, char *ptrn)
+{
+	char	*new_str;
+	char	*new_ptrn;
+	char	*tmp;
+	int		result;
+	
+	new_ptrn = ft_strdup(ptrn);
+	if (! new_ptrn)
+		return (0);
+	replace_sym_to_minus_q(new_ptrn, '*');
+	tmp = new_ptrn;
+	new_ptrn = open_quotes(tmp);
+	free(tmp);
+	if (! new_ptrn)
+		return (0);
+	new_str = ft_strdup(str);
+	if (! new_str)
+	{
+		free (new_ptrn);
+		return (0);
+	}
+	replace_sym_to_minus(new_str, '*');
+	result = str_wildcard_compare(new_str, new_ptrn);
+	free(new_str);
+	free(new_ptrn);
+	return (result);
+}
+
 char	**apply_wildcard(char *pattern, char** text)
 {
 	int		count;
@@ -66,7 +121,7 @@ char	**apply_wildcard(char *pattern, char** text)
 	i = 0;
 	while (*text)
 	{
-		if (**text != 0 && str_wildcard_compare(*text, pattern))
+		if (**text != 0 && pre_str_wildcard_compare(*text, pattern))
 			arr[i++] = ft_strdup(*text);
 		text++;
 	}
@@ -138,7 +193,7 @@ char	*expand_wildcard_cwd(char *wildcard)
 	return (result);
 }
 
-// TODO fix for case "*"
+// TODO fix for case te"*"t
 static int skip_word(char *word)
 {
 	if (word[0] == '-' || find_first_char(word, '*') == -1)

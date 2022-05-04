@@ -56,3 +56,5 @@ minishell
 .DS_Store
 a*test
 abtest
+te*st
+*file
