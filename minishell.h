@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: EClown <eclown@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 11:38:10 by EClown            #+#    #+#             */
-/*   Updated: 2022/04/11 00:08:43 by EClown           ###   ########.fr       */
+/*   Updated: 2022/05/04 16:19:37 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include <fcntl.h>
+# include <fcntl.h>e
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -53,9 +53,9 @@ typedef struct s_cmd
 	int				exec_condition;	// Условие выполнения в зависимости от результат предыдущей команды 'A' (Any case), 'E' (error) 'S' (succes)
 	int				in_fd;			// fd для входящего потока
 	int				out_fd;			// fd для исходящего потока
-	int				isbroken;		// 1 если команда задана не верно, иначе 0		???
-	char			*error_text;	// Если is_broken == 1, содержит текст ошибки для вывода	???
-	int				isfunc;			// 1 если команда является внутренний функций, иначе 0
+	// int				isbroken;		// 1 если команда задана не верно, иначе 0		???
+	// char			*error_text;	// Если is_broken == 1, содержит текст ошибки для вывода	???
+	// int				isfunc;			// 1 если команда является внутренний функций, иначе 0
 	char			**command;		// Массив. 0-й аргумент пусть до файла (имя функции), остальные элементы - аргументы.
 	struct s_cmd	*next;			// Указатель на следующий элемент (по горизонтали)
 	struct s_cmd	*child;			// Указатель на потомка (NULL по умолчанию). Если  NULL, то это команда.
@@ -76,7 +76,7 @@ typedef struct s_ms
 	t_cmd	*commands;		// Указатель на начало списка текущих команд
 	t_str	*funcs;			// Список валидных функций minishell
 	t_dict	*vars;			// Список переменных типа  $var
-	int		exit_code;		// Exit code последней исполненной команды
+	int		errno;		// Exit code последней исполненной команды
 }   t_ms;
 
 t_ms	g_ms;
@@ -141,5 +141,8 @@ void	envp_replace(char *variable, char *value);
 void	envp_status(void);
 
 # endif // ENVP_H
+
+t_cmd	*parserlvl1(char *string);
+void	print_tree(t_cmd *command, int id);
 
 #endif  /* MINISHELL_H */

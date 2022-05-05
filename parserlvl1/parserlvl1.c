@@ -6,7 +6,7 @@
 /*   By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:27:19 by ccamie            #+#    #+#             */
-/*   Updated: 2022/04/12 19:13:52 by ccamie           ###   ########.fr       */
+/*   Updated: 2022/05/02 18:46:06 by ccamie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ static char	**split_by_operators(char *string)
 	size_t	count;
 
 	count = get_count(string);
-	printf("count: %zu\n", count);
+	// printf("count: %zu\n", count);
 	strings = (char **)malloc((count + 1) * sizeof(char *));
 	if (strings == NULL)
 	{

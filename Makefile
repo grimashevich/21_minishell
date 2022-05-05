@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 21:12:21 by ccamie            #+#    #+#              #
-#    Updated: 2022/04/12 21:12:22 by ccamie           ###   ########.fr        #
+#    Updated: 2022/05/02 17:34:01 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEADER		=	minishell.h
 LIBFT		=	libft/libft.a
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined
+# CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined
 # CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 
@@ -48,7 +48,7 @@ OBJECT		=	$(SOURCE:.c=.o)
 all			:	libft $(NAME)
 
 $(NAME)		:	$(OBJECT) $(LIBFT)
-				$(CC) $(CFLAGS) $(OBJECT) $(LIBFT) -o $(NAME)
+				$(CC) $(CFLAGS) -lreadline  $(OBJECT) $(LIBFT) -o $(NAME)
 
 %.o			:	%.c Makefile
 				$(CC) $(CFLAGS) -c $< -o $@

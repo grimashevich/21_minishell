@@ -6,7 +6,7 @@
 #    By: ccamie <ccamie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 22:56:37 by ccamie            #+#    #+#              #
-#    Updated: 2022/04/12 21:11:51 by ccamie           ###   ########.fr        #
+#    Updated: 2022/04/30 14:57:31 by ccamie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME		=	libft.a
 HEADER		=	libft.h
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -fsanitize=undefined
-# CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		+=	-fsanitize=address
+# CFLAGS		+=	-fsanitize=undefined
 AR			=	ar
 ARFLAGS		=	crs
 RM			=	rm -f
